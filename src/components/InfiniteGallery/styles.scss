@@ -8,7 +8,7 @@
 
   .gallery-item {
     position: relative;
-    aspect-ratio: 664/497; // my best guess from the screenshots
+    aspect-ratio: 664/497; // my best shot at replicating the dimensions from the screenshots
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
@@ -34,7 +34,7 @@
       align-items: center;
       text-align: center;
       padding-bottom: 20px;
-      h4 {
+      .title {
         margin: 0;
         font-size: 1.5rem;
         text-wrap: pretty;
@@ -44,14 +44,14 @@
           width: 50px;
           height: 3px;
           background-color: white;
-          margin: 10px auto;
+          margin: 5px auto 10px;
         }
       }
-      h6 {
+      .photographer {
         margin: 0;
         font-size: 1rem;
       }
-      button {
+      .favorite-button {
         cursor: pointer;
         background-color: transparent;
         border: 1px solid white;
@@ -63,6 +63,12 @@
         transition: all 0.3s ease;
         &:hover {
           background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        &.favorited {
+          background-color: rgba(255, 255, 255, 0.8);
+          border: 1px ridge white;
+          color: black;
         }
       }
     }

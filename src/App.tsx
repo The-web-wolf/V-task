@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { createClient } from 'pexels'
 import InfiniteGallery from '@/components/InfiniteGallery'
 import type { GalleryItem } from '@/types/gallery'
 import { PER_PAGE, TOTAL_LIMIT, QUERY } from '@/constants'
+import { FavoritesContext } from '@/favoriteContext'
 
 function App() {
   const [gallery, setGallery] = useState<GalleryItem[]>([])
@@ -10,6 +11,7 @@ function App() {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
   const client = createClient(import.meta.env.VITE_PEXELS_API_KEY)
+  const { isFavorite } = useContext(FavoritesContext)
 
   interface PhotosPayload {
     page: number
@@ -28,13 +30,16 @@ function App() {
         page,
       })
       if ('photos' in response) {
-        const photos = response.photos.map((photo) => ({
-          id: photo.id,
-          photographer: photo.photographer,
-          url: photo.url,
-          src: photo.src.medium,
-          alt: photo.alt || 'No title',
-        }))
+        const photos = response.photos.map((photo) => {
+          return {
+            id: photo.id,
+            photographer: photo.photographer,
+            url: photo.url,
+            src: photo.src.medium,
+            alt: photo.alt || 'No Title',
+            favorite: isFavorite(photo.id),
+          }
+        })
         setGallery((gallery) => [...gallery, ...photos])
         setPage(page + 1)
       }
