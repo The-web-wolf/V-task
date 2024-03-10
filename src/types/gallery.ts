@@ -1,12 +1,9 @@
-// gallery type
-
 export type GalleryItem = {
   id: number
   photographer: string
   url: string
   src: string
   alt?: string
-  favorite?: boolean
 }
 
 export type GalleryResponse = {
@@ -17,9 +14,13 @@ export type GalleryResponse = {
   total_results: number
 }
 
+export type FavoriteItem = {
+  id: number
+}
+
 export type FavoriteProvider = {
-  favorites: GalleryItem[]
+  favorites: FavoriteItem[]
   isFavorite: (id: number) => boolean
-  addFavorite: (item: GalleryItem) => void
+  addFavorite: (id: number) => void
   removeFavorite: (id: number) => void
 }

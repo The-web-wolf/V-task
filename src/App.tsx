@@ -1,9 +1,10 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { createClient } from 'pexels'
 import InfiniteGallery from '@/components/InfiniteGallery'
 import type { GalleryItem } from '@/types/gallery'
 import { PER_PAGE, TOTAL_LIMIT, QUERY } from '@/constants'
 import { FavoritesContext } from '@/favoriteContext'
+import Loader from './components/loader'
 
 function App() {
   const [gallery, setGallery] = useState<GalleryItem[]>([])
@@ -13,15 +14,13 @@ function App() {
   const client = createClient(import.meta.env.VITE_PEXELS_API_KEY)
   const { isFavorite } = useContext(FavoritesContext)
 
-  interface PhotosPayload {
-    page: number
-  }
-
-  const fetchPhotos = async ({ page }: PhotosPayload) => {
+  const fetchPhotos = async () => {
+    if (loading) return
     if (gallery.length >= TOTAL_LIMIT) {
       console.log("Don't you think that's enough? 🤔")
       return
     }
+
     setLoading(true)
     try {
       const response = await client.photos.search({
@@ -41,7 +40,7 @@ function App() {
           }
         })
         setGallery((gallery) => [...gallery, ...photos])
-        setPage(page + 1)
+        setPage((page) => page + 1)
       }
     } catch (error) {
       console.error(error)
@@ -51,20 +50,22 @@ function App() {
     }
   }
 
-  const loadMore = () => {
-    fetchPhotos({ page })
-  }
+  useEffect(() => {
+    fetchPhotos()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <>
-      {error && <div className="err">{error}</div>}
-      {loading && <div className="loading">Loading...</div>}
-      <InfiniteGallery gallery={gallery} />
-      {!loading && !error && (
-        <div className="load-more">
-          <button onClick={loadMore}>Load More {page} </button>
-        </div>
-      )}
-    </>
+    <div className="AppContainer">
+      <InfiniteGallery
+        gallery={gallery}
+        onFetchPhotos={fetchPhotos}
+        loading={loading}
+        updateLoadingState={(loadState: boolean) => setLoading(loadState)}
+      />
+      {error && <div className="error">{error}</div>}
+      {loading && <Loader />}
+    </div>
   )
 }
 

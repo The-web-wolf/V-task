@@ -9,13 +9,13 @@ const GalleryImg = ({ item }: { item: GalleryItem }) => {
     if (isFavorite(item.id)) {
       removeFavorite(item.id)
     } else {
-      addFavorite(item)
+      addFavorite(item.id)
     }
   }
 
   return (
     <div className="gallery-item">
-      <img src={item.src} alt={item.alt} />
+      <img src={item.src} alt={item.alt} loading="lazy" />
 
       <div className="gallery-item-info">
         <h4 className="title">{item.alt}</h4>
@@ -24,7 +24,7 @@ const GalleryImg = ({ item }: { item: GalleryItem }) => {
           className={`favorite-button ${isFavorite(item.id) ? 'favorited' : ''}`}
           onClick={handleFavoriteButton}
         >
-          Favorite
+          Favorite {isFavorite(item.id) ? '✔️' : ''}
         </button>
       </div>
     </div>
