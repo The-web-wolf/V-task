@@ -17,6 +17,7 @@ const LightBoxProvider = ({
 
   const onShow = (item: GalleryItem) => {
     setLightBox(item)
+    setImgLoaded(false)
     document.body.classList.add('no-scroll')
   }
 
@@ -37,6 +38,7 @@ const LightBoxProvider = ({
 
   const onNext = () => {
     if (!lightbox) return
+    setImgLoaded(false)
     const idx = gallery.findIndex((i) => i.id === lightbox.id)
     if (idx < gallery.length - 1) {
       setLightBox(gallery[idx + 1])
@@ -45,6 +47,7 @@ const LightBoxProvider = ({
 
   const onPrev = () => {
     if (!lightbox) return
+    setImgLoaded(false)
     const idx = gallery.findIndex((i) => i.id === lightbox.id)
     if (idx > 0) {
       setLightBox(gallery[idx - 1])
@@ -57,11 +60,10 @@ const LightBoxProvider = ({
 
   useEffect(() => {
     if (lightbox) {
-      setImgLoaded(false)
       const idx = gallery.findIndex((i) => i.id === lightbox.id)
       setIdxInfoText(`${idx + 1} / ${gallery.length}`)
     }
-  }, [lightbox])
+  }, [lightbox, gallery])
 
   return (
     <LightBoxContext.Provider

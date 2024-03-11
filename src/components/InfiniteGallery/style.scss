@@ -55,18 +55,6 @@
         font-size: 1rem;
         text-wrap: balance;
       }
-      .favorite-button {
-        margin: 1rem 0;
-        height: 45px;
-        aspect-ratio: 16/6;
-        border-radius: 99999em;
-
-        &.favorited {
-          background-color: rgba(255, 255, 255, 0.8);
-          border: 1px ridge white;
-          color: black;
-        }
-      }
     }
 
     &:hover {
@@ -87,7 +75,7 @@
   }
 
   @media (max-width: 400px) {
-    gap: 5px;
-    padding: 5px 0;
+    // gap: 5px;
+    // padding: 5px 0;
   }
 }

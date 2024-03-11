@@ -79,29 +79,70 @@
         font-size: 1rem;
       }
     }
-  }
 
-  .next,
-  .prev,
-  .close {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 101;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    &.next {
-      right: 1rem;
+    // Position styles for the buttons
+    .header,
+    .next,
+    .prev {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      transform: translateY(-50%);
+      &.next {
+        right: 1rem;
+      }
+      &.prev {
+        left: 1rem;
+      }
+      &.header {
+        top: 1rem;
+        right: 1rem;
+        transform: none;
+        width: 50%;
+        text-align: right;
+        :first-child {
+          margin-right: 0.5rem;
+        }
+      }
     }
-    &.prev {
-      left: 1rem;
+
+    .next,
+    .prev,
+    .close,
+    .favorite-button {
+      height: 50px;
+      width: 50px;
+      border-radius: 25px;
+      font-size: 1.2rem;
+      margin: 0;
     }
-    &.close {
-      top: 1rem;
-      right: 1rem;
-      transform: none;
-      border-radius: 0;
+
+    @media screen and (max-width: 1106px) {
+      .next,
+      .prev,
+      .close,
+      .favorite-button {
+        background-color: #ffffff;
+        color: #000000;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      // Position styles for the buttons
+      .header,
+      .next,
+      .prev {
+        top: 40%;
+      }
+      .next,
+      .prev,
+      .close,
+      .favorite-button {
+        height: 40px;
+        width: 40px;
+        border-radius: 20px;
+        font-size: 1rem;
+      }
     }
   }
 }

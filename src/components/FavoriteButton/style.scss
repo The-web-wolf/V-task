@@ -1,0 +1,16 @@
+.favorite-button {
+  margin: 1rem 0;
+  height: 45px;
+  aspect-ratio: 16/6;
+  border-radius: 99999em;
+  &.favorited {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px ridge white;
+    color: black;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.6);
+      color: black;
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react'
 import { LightBoxContext } from '@/contexts/lightBoxContext'
 import Loader from '@/components/Loader'
 import './style.scss'
+import FavoriteButton from '@/components/FavoriteButton'
 
 const LightBox = () => {
   const {
@@ -60,17 +61,20 @@ const LightBox = () => {
               </div>
             )}
           </div>
+          <button className="prev" onClick={onPrev} disabled={!hasPrev()} aria-label="Prev">
+            &larr;
+          </button>
+          <button className="next" onClick={onNext} disabled={!hasNext()} aria-label="Next">
+            &rarr;
+          </button>
+          <div className="header">
+            <FavoriteButton id={lightbox.id} showText={false} />
+            <button className="close" onClick={onClose} aria-label="Close">
+              &times;
+            </button>
+          </div>
         </div>
       )}
-      <button className="prev" onClick={onPrev} disabled={!hasPrev()} aria-label="Prev">
-        &larr;
-      </button>
-      <button className="next" onClick={onNext} disabled={!hasNext()} aria-label="Next">
-        &rarr;
-      </button>
-      <button className="close" onClick={onClose} aria-label="Close">
-        &times;
-      </button>
     </div>
   )
 }
