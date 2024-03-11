@@ -3,10 +3,8 @@ html,
 :root {
   background-color: #e7e7e7;
 
-  &body {
-    &.no-scroll {
-      overflow: hidden;
-    }
+  &.no-scroll {
+    overflow: hidden;
   }
 
   //Keeping some of Vite default styles
