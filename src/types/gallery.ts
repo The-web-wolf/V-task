@@ -2,7 +2,10 @@ export type GalleryItem = {
   id: number
   photographer: string
   url: string
-  src: string
+  src: {
+    x: string
+    xx: string
+  }
   alt?: string
 }
 
@@ -23,4 +26,19 @@ export type FavoriteProvider = {
   isFavorite: (id: number) => boolean
   addFavorite: (id: number) => void
   removeFavorite: (id: number) => void
+}
+
+export interface LightBoxItem extends GalleryItem {}
+
+export type LightBoxProvider = {
+  lightbox: LightBoxItem | null
+  imgLoaded: boolean
+  idxInfoText: string
+  onShow: (item: GalleryItem) => void
+  onClose: () => void
+  hasNext: () => boolean
+  hasPrev: () => boolean
+  onNext: () => void
+  onPrev: () => void
+  onImgLoaded: () => void
 }

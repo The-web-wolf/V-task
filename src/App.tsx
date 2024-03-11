@@ -3,8 +3,10 @@ import { createClient } from 'pexels'
 import InfiniteGallery from '@/components/InfiniteGallery'
 import type { GalleryItem } from '@/types/gallery'
 import { PER_PAGE, TOTAL_LIMIT, QUERY } from '@/constants'
-import { FavoritesContext } from '@/favoriteContext'
-import Loader from './components/loader'
+import { FavoritesContext } from '@/contexts/favoriteContext'
+import Loader from '@/components/Loader'
+import LightBox from './components/LightBox'
+import { LightBoxProvider } from '@/contexts/lightBoxContext'
 
 function App() {
   const [gallery, setGallery] = useState<GalleryItem[]>([])
@@ -34,7 +36,10 @@ function App() {
             id: photo.id,
             photographer: photo.photographer,
             url: photo.url,
-            src: photo.src.medium,
+            src: {
+              x: photo.src.medium,
+              xx: photo.src.large,
+            },
             alt: photo.alt || 'No Title',
             favorite: isFavorite(photo.id),
           }
@@ -44,7 +49,7 @@ function App() {
       }
     } catch (error) {
       console.error(error)
-      setError('Error fetching data')
+      setError('Error fetching data, check the console for more info.')
     } finally {
       setLoading(false)
     }
@@ -57,12 +62,15 @@ function App() {
 
   return (
     <div className="AppContainer">
-      <InfiniteGallery
-        gallery={gallery}
-        onFetchPhotos={fetchPhotos}
-        loading={loading}
-        updateLoadingState={(loadState: boolean) => setLoading(loadState)}
-      />
+      <LightBoxProvider gallery={gallery}>
+        <LightBox />
+        <InfiniteGallery
+          gallery={gallery}
+          onFetchPhotos={fetchPhotos}
+          loading={loading}
+          onUpdateLoadingState={(loadState: boolean) => setLoading(loadState)}
+        />
+      </LightBoxProvider>
       {error && <div className="error">{error}</div>}
       {loading && <Loader />}
     </div>

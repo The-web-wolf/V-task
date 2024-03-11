@@ -20,6 +20,7 @@
       transition: all 0.3s ease;
     }
     .gallery-item-info {
+      cursor: zoom-in;
       position: absolute;
       bottom: 0;
       left: 0;
@@ -35,6 +36,7 @@
       align-items: center;
       text-align: center;
       padding: 1rem;
+
       .title {
         margin: 0;
         font-size: 1.5rem;
@@ -51,20 +53,13 @@
       .photographer {
         margin: 0;
         font-size: 1rem;
+        text-wrap: balance;
       }
       .favorite-button {
-        background-color: transparent;
-        border: 1px solid white;
-        color: white;
         margin: 1rem 0;
-        font-size: 1rem;
         height: 45px;
         aspect-ratio: 16/6;
         border-radius: 99999em;
-        transition: all 0.3s ease;
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.2);
-        }
 
         &.favorited {
           background-color: rgba(255, 255, 255, 0.8);

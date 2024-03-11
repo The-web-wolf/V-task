@@ -1,0 +1,116 @@
+@mixin showAnim {
+  animation: showAnimation 0.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+@mixin displayCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightboxWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  @include displayCenter;
+  background-color: rgba(0, 0, 0, 0.96);
+  display: none;
+  &.show {
+    @include showAnim;
+    display: flex;
+  }
+
+  .lightbox {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .img {
+      flex-grow: 1;
+      padding: 0.5rem;
+      @include displayCenter;
+      .mainImg {
+        opacity: 0;
+        object-fit: contain;
+        max-width: 100%;
+        &.loaded {
+          @include showAnim;
+        }
+      }
+      .loadingImg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+      }
+    }
+    .lightboxInfo {
+      color: white;
+      padding: 1rem;
+      .idxInfo {
+        font-size: 0.8rem;
+        color: #e7e7e7;
+        margin-bottom: 1rem;
+      }
+      .title {
+        font-size: 1.5rem;
+        text-wrap: balance;
+        &::after {
+          content: '';
+          display: block;
+          width: 6.8rem;
+          height: 3px;
+          background-color: white;
+          margin: 10px 0 20px;
+        }
+      }
+      .photographer {
+        span {
+          color: rgba(231, 231, 231, 0.379);
+          text-transform: uppercase;
+          font-size: smaller;
+        }
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .next,
+  .prev,
+  .close {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 101;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    &.next {
+      right: 1rem;
+    }
+    &.prev {
+      left: 1rem;
+    }
+    &.close {
+      top: 1rem;
+      right: 1rem;
+      transform: none;
+      border-radius: 0;
+    }
+  }
+}
+
+@keyframes showAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

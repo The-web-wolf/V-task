@@ -5,9 +5,15 @@
   display: block;
   margin: 15px auto;
   position: relative;
-  color: #0c1f3e;
   box-sizing: border-box;
   animation: animloader 0.7s linear infinite alternate;
+
+  &.light {
+    color: #020c1c;
+  }
+  &.dark {
+    color: #f5f5f5;
+  }
 }
 
 @keyframes animloader {
@@ -25,5 +31,5 @@
   }
 }
 
-// Got this loading animation from:
+// Got this loading keyframe animation from:
 // https://cssloaders.github.io/

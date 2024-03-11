@@ -1,18 +1,18 @@
 import { useEffect, useRef } from 'react'
 import type { GalleryItem } from '@/types/gallery'
 import GalleryImg from './galleryImg'
-import './styles.scss'
+import './style.scss'
 
 const InfiniteGallery = ({
   gallery,
   onFetchPhotos,
   loading,
-  updateLoadingState,
+  onUpdateLoadingState,
 }: {
   gallery: GalleryItem[]
   onFetchPhotos: () => Promise<void>
   loading: boolean
-  updateLoadingState: (state: boolean) => void
+  onUpdateLoadingState: (state: boolean) => void
 }) => {
   const observer = useRef<IntersectionObserver | null>(null)
   const lastGalleryItem = useRef<HTMLDivElement | null>(null)
@@ -25,10 +25,10 @@ const InfiniteGallery = ({
 
       observer.current = new IntersectionObserver(async (entries) => {
         if (entries[0].isIntersecting && !loading) {
-          updateLoadingState(true)
+          onUpdateLoadingState(true)
           setTimeout(async () => {
             await onFetchPhotos()
-            updateLoadingState(false)
+            onUpdateLoadingState(false)
           }, 500) // gives a little debounce effect
         }
       }, options)
@@ -39,19 +39,20 @@ const InfiniteGallery = ({
     return () => {
       if (observer.current) observer.current.disconnect()
     }
-  }, [onFetchPhotos, loading, updateLoadingState])
+  }, [onFetchPhotos, loading, onUpdateLoadingState])
 
   return (
     <div className="gallery">
       {gallery.map((item, index) => {
         if (index === gallery.length - 1) {
+          // add ref to the last img to use later for scroll
           return (
             <div key={item.id} ref={lastGalleryItem}>
-              <GalleryImg item={item} />
+              <GalleryImg item={item} idx={index} />
             </div>
           )
         }
-        return <GalleryImg key={item.id} item={item} />
+        return <GalleryImg key={item.id} item={item} idx={index} />
       })}
     </div>
   )
