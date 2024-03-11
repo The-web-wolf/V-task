@@ -22,7 +22,9 @@ const FavoriteButton = ({ id, showText = true }: { id: number; showText?: boolea
       title="Favorite"
     >
       {showText ? 'Favorite ' : ''}
-      {isFavorite(id) ? '❤️' : showText ? '' : '🩶'}
+      <span className="material-symbols-rounded">
+        {isFavorite(id) ? 'favorite' : showText ? '' : 'favorite'}
+      </span>
     </button>
   )
 }

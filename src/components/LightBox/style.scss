@@ -98,9 +98,9 @@
         top: 1rem;
         right: 1rem;
         transform: none;
-        width: 50%;
+        width: 130px;
         text-align: right;
-        :first-child {
+        .favorite-button {
           margin-right: 0.5rem;
         }
       }
@@ -113,7 +113,7 @@
       height: 50px;
       width: 50px;
       border-radius: 25px;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       margin: 0;
     }
 

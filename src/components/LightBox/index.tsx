@@ -70,16 +70,25 @@ const LightBox = () => {
               </div>
             )}
           </div>
-          <button className="prev" onClick={onPrev} disabled={!hasPrev()} aria-label="Prev">
-            &larr;
+          <button
+            className="prev material-symbols-rounded"
+            onClick={onPrev}
+            disabled={!hasPrev()}
+            aria-label="Prev"
+          >
+            west
           </button>
-          <button className="next" onClick={handleNext} aria-label="Next">
-            {hasNext() ? <span>&rarr;</span> : '...'}
+          <button
+            className="next material-symbols-rounded"
+            onClick={handleNext}
+            aria-label={hasNext() ? 'Next' : 'Fetch more photos'}
+          >
+            {hasNext() ? 'east' : 'steppers'}
           </button>
           <div className="header">
             <FavoriteButton id={lightbox.id} showText={false} />
-            <button className="close" onClick={onClose} aria-label="Close">
-              &times;
+            <button className="close material-symbols-rounded" onClick={onClose} aria-label="Close">
+              close
             </button>
           </div>
         </div>
