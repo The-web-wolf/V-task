@@ -41,4 +41,5 @@ export type LightBoxProvider = {
   onNext: () => void
   onPrev: () => void
   onImgLoaded: () => void
+  onFetchPhotos: () => Promise<void>
 }

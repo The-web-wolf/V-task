@@ -62,7 +62,7 @@ function App() {
 
   return (
     <div className="AppContainer">
-      <LightBoxProvider gallery={gallery}>
+      <LightBoxProvider gallery={gallery} onFetchPhotos={fetchPhotos}>
         <LightBox />
         <InfiniteGallery
           gallery={gallery}

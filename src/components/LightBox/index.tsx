@@ -15,7 +15,16 @@ const LightBox = () => {
     onPrev,
     onClose,
     onImgLoaded,
+    onFetchPhotos,
   } = useContext(LightBoxContext)
+
+  const handleNext = async () => {
+    if (hasNext()) {
+      onNext()
+    } else {
+      onFetchPhotos()
+    }
+  }
 
   // events listener for keyboard navigation
   useEffect(() => {
@@ -64,8 +73,8 @@ const LightBox = () => {
           <button className="prev" onClick={onPrev} disabled={!hasPrev()} aria-label="Prev">
             &larr;
           </button>
-          <button className="next" onClick={onNext} disabled={!hasNext()} aria-label="Next">
-            &rarr;
+          <button className="next" onClick={handleNext} aria-label="Next">
+            {hasNext() ? <span>&rarr;</span> : '...'}
           </button>
           <div className="header">
             <FavoriteButton id={lightbox.id} showText={false} />

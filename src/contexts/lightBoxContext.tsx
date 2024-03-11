@@ -7,9 +7,11 @@ const LightBoxContext = createContext<LightBoxProvider>({} as LightBoxProvider)
 const LightBoxProvider = ({
   children,
   gallery,
+  onFetchPhotos,
 }: {
   children: React.ReactNode
   gallery: GalleryItem[]
+  onFetchPhotos: () => Promise<void>
 }) => {
   const [lightbox, setLightBox] = useState<LightBoxItem | null>(null)
   const [imgLoaded, setImgLoaded] = useState(false)
@@ -78,6 +80,7 @@ const LightBoxProvider = ({
         onNext,
         onPrev,
         onImgLoaded,
+        onFetchPhotos,
       }}
     >
       {children}
