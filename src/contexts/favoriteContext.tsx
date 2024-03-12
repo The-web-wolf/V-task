@@ -1,16 +1,20 @@
 import { createContext, useState, useEffect } from 'react'
 
-import type { FavoriteProvider, FavoriteItem } from '@/types/gallery'
+import type { FavoriteContextProps, FavoriteProviderProps, FavoriteItem } from '@/types/gallery'
 
-const FavoritesContext = createContext<FavoriteProvider>({} as FavoriteProvider)
+const FavoritesContext = createContext<FavoriteContextProps>({} as FavoriteContextProps)
 
-const FavoritesProvider = ({ children }: { children: React.ReactNode }) => {
+const FavoritesProvider = ({ children }: FavoriteProviderProps) => {
   const [favorites, setFavorites] = useState<FavoriteItem[]>([])
 
   useEffect(() => {
-    const data = localStorage.getItem('favorites')
-    if (data) {
-      setFavorites(JSON.parse(data))
+    try {
+      const data = localStorage.getItem('favorites')
+      if (data) {
+        setFavorites(JSON.parse(data))
+      }
+    } catch (error) {
+      console.error(error)
     }
   }, [])
 

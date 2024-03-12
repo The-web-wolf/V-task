@@ -124,6 +124,10 @@
       .favorite-button {
         background-color: #ffffff;
         color: #000000;
+
+        &:disabled {
+          display: none;
+        }
       }
     }
 

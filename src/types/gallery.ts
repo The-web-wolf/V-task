@@ -9,19 +9,19 @@ export type GalleryItem = {
   alt?: string
 }
 
-export type GalleryResponse = {
-  next_page: string
-  page: number
-  per_page: number
-  photos: GalleryItem[]
-  total_results: number
+export type InfiniteGalleryProps = {
+  gallery: GalleryItem[]
+  onFetchPhotos: () => Promise<void>
+  loading: boolean
+  canFetch: boolean
+  onUpdateLoadingState: (state: boolean) => void
 }
 
 export type FavoriteItem = {
   id: number
 }
 
-export type FavoriteProvider = {
+export type FavoriteContextProps = {
   favorites: FavoriteItem[]
   isFavorite: (id: number) => boolean
   addFavorite: (id: number) => void
@@ -30,10 +30,11 @@ export type FavoriteProvider = {
 
 export interface LightBoxItem extends GalleryItem {}
 
-export type LightBoxProvider = {
+export type LightBoxContextProps = {
   lightbox: LightBoxItem | null
   imgLoaded: boolean
   idxInfoText: string
+  canFetch: boolean
   onShow: (item: GalleryItem) => void
   onClose: () => void
   hasNext: () => boolean
@@ -42,4 +43,15 @@ export type LightBoxProvider = {
   onPrev: () => void
   onImgLoaded: () => void
   onFetchPhotos: () => Promise<void>
+}
+
+export type LightBoxProviderProps = {
+  children: React.ReactNode
+  gallery: GalleryItem[]
+  canFetch: boolean
+  onFetchPhotos: () => Promise<void>
+}
+
+export type FavoriteProviderProps = {
+  children: React.ReactNode
 }

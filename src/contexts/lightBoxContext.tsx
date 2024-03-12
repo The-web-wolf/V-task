@@ -1,18 +1,20 @@
 import { createContext, useEffect, useState } from 'react'
 
-import type { LightBoxProvider, LightBoxItem, GalleryItem } from '@/types/gallery'
+import type {
+  LightBoxContextProps,
+  LightBoxProviderProps,
+  LightBoxItem,
+  GalleryItem,
+} from '@/types/gallery'
 
-const LightBoxContext = createContext<LightBoxProvider>({} as LightBoxProvider)
+const LightBoxContext = createContext<LightBoxContextProps>({} as LightBoxContextProps)
 
 const LightBoxProvider = ({
   children,
+  canFetch,
   gallery,
   onFetchPhotos,
-}: {
-  children: React.ReactNode
-  gallery: GalleryItem[]
-  onFetchPhotos: () => Promise<void>
-}) => {
+}: LightBoxProviderProps) => {
   const [lightbox, setLightBox] = useState<LightBoxItem | null>(null)
   const [imgLoaded, setImgLoaded] = useState(false)
   const [idxInfoText, setIdxInfoText] = useState('')
@@ -70,6 +72,7 @@ const LightBoxProvider = ({
   return (
     <LightBoxContext.Provider
       value={{
+        canFetch,
         lightbox,
         imgLoaded,
         idxInfoText,

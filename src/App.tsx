@@ -13,11 +13,12 @@ function App() {
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+  const [canFetch, setCanFetch] = useState<boolean>(true)
   const client = createClient(import.meta.env.VITE_PEXELS_API_KEY)
   const { isFavorite } = useContext(FavoritesContext)
 
   const fetchPhotos = async () => {
-    if (loading) return
+    if (loading || !canFetch) return
     if (gallery.length >= TOTAL_LIMIT) {
       console.log("Don't you think that's enough? 🤔")
       return
@@ -30,7 +31,14 @@ function App() {
         per_page: PER_PAGE,
         page,
       })
+
+      // this makes sure that it is not an error response
       if ('photos' in response) {
+        if (!response.photos.length || !response.next_page) {
+          //if there are no more photos to fetch, stop fetching
+          setCanFetch(false)
+        }
+
         const photos = response.photos.map((photo) => {
           return {
             id: photo.id,
@@ -45,6 +53,7 @@ function App() {
           }
         })
         setGallery((gallery) => [...gallery, ...photos])
+
         setPage((page) => page + 1)
       }
     } catch (error) {
@@ -62,9 +71,10 @@ function App() {
 
   return (
     <div className="AppContainer">
-      <LightBoxProvider gallery={gallery} onFetchPhotos={fetchPhotos}>
+      <LightBoxProvider gallery={gallery} canFetch={canFetch} onFetchPhotos={fetchPhotos}>
         <LightBox />
         <InfiniteGallery
+          canFetch={canFetch}
           gallery={gallery}
           onFetchPhotos={fetchPhotos}
           loading={loading}

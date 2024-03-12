@@ -9,6 +9,7 @@ const LightBox = () => {
     lightbox,
     imgLoaded,
     idxInfoText,
+    canFetch,
     hasNext,
     hasPrev,
     onNext,
@@ -82,6 +83,7 @@ const LightBox = () => {
             className="next material-symbols-rounded"
             onClick={handleNext}
             aria-label={hasNext() ? 'Next' : 'Fetch more photos'}
+            disabled={!canFetch && !hasNext()}
           >
             {hasNext() ? 'east' : 'steppers'}
           </button>

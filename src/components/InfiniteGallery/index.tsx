@@ -1,24 +1,20 @@
 import { useEffect, useRef } from 'react'
-import type { GalleryItem } from '@/types/gallery'
+import type { InfiniteGalleryProps } from '@/types/gallery'
 import GalleryImg from './galleryImg'
 import './style.scss'
 
 const InfiniteGallery = ({
+  canFetch,
   gallery,
   onFetchPhotos,
   loading,
   onUpdateLoadingState,
-}: {
-  gallery: GalleryItem[]
-  onFetchPhotos: () => Promise<void>
-  loading: boolean
-  onUpdateLoadingState: (state: boolean) => void
-}) => {
+}: InfiniteGalleryProps) => {
   const observer = useRef<IntersectionObserver | null>(null)
   const lastGalleryItem = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (lastGalleryItem.current) {
+    if (lastGalleryItem.current && canFetch) {
       const options = {
         rootMargin: '50px',
       }
@@ -39,7 +35,7 @@ const InfiniteGallery = ({
     return () => {
       if (observer.current) observer.current.disconnect()
     }
-  }, [onFetchPhotos, loading, onUpdateLoadingState])
+  }, [onFetchPhotos, loading, canFetch, onUpdateLoadingState])
 
   return (
     <div className="gallery">
