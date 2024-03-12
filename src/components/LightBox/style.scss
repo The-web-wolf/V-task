@@ -99,7 +99,9 @@
         right: 1rem;
         transform: none;
         width: 130px;
-        text-align: right;
+        display: flex;
+        align-items: start;
+        justify-content: flex-end;
         .favorite-button {
           margin-right: 0.5rem;
         }
