@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { LightBoxContext } from '@/contexts/lightBoxContext'
 import { PER_PAGE } from '@/constants'
 import FavoriteButton from '@/components/FavoriteButton'
+import './style.scss'
 
 interface GalleryImgProps {
   item: GalleryItem

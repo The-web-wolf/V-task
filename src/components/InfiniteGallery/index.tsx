@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { InfiniteGalleryProps } from '@/types/gallery'
-import GalleryImg from './galleryImg'
+import GalleryImg from '@/components/GalleryImg'
 import './style.scss'
 
 const InfiniteGallery = ({
