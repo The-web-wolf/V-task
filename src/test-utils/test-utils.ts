@@ -5,6 +5,7 @@ import { afterEach } from 'vitest'
 
 afterEach(() => {
   cleanup()
+  vi.restoreAllMocks()
 })
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>

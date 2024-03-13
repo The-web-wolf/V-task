@@ -38,12 +38,12 @@ const InfiniteGallery = ({
   }, [onFetchPhotos, loading, canFetch, onUpdateLoadingState])
 
   return (
-    <div className="gallery">
+    <div className="gallery" role="gallery">
       {gallery.map((item, index) => {
         if (index === gallery.length - 1) {
           // add ref to the last img to use later for scroll
           return (
-            <div key={item.id} ref={lastGalleryItem}>
+            <div key={item.id} ref={lastGalleryItem} role="gallery-last-item">
               <GalleryImg item={item} idx={index} />
             </div>
           )
