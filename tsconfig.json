@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
+    "types": ["vitest/globals"],
     "paths": {
       "@/*": ["*"],
+      "@test-utils": ["test-utils/test-utils.ts"],
     },
     "target": "ES2020",
     "useDefineForClassFields": true,

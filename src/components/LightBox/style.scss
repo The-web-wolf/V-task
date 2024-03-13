@@ -38,6 +38,7 @@
         opacity: 0;
         object-fit: contain;
         max-width: 100%;
+        max-height: 85vh;
         &.loaded {
           @include showAnim;
         }
@@ -83,12 +84,14 @@
     // Position styles for the buttons
     .header,
     .next,
-    .prev {
+    .prev,
+    .fetch-more {
       position: absolute;
       z-index: 1;
       top: 50%;
       transform: translateY(-50%);
-      &.next {
+      &.next,
+      &.fetch-more {
         right: 1rem;
       }
       &.prev {
@@ -109,6 +112,7 @@
     }
 
     .next,
+    .fetch-more,
     .prev,
     .close,
     .favorite-button {
@@ -121,6 +125,7 @@
 
     @media screen and (max-width: 1106px) {
       .next,
+      .fetch-more,
       .prev,
       .close,
       .favorite-button {
@@ -137,10 +142,12 @@
       // Position styles for the buttons
       .header,
       .next,
+      .fetch-more,
       .prev {
         top: 40%;
       }
       .next,
+      .fetch-more,
       .prev,
       .close,
       .favorite-button {

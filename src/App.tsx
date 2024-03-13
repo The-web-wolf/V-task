@@ -25,6 +25,7 @@ function App() {
     }
 
     setLoading(true)
+    setError(null)
     try {
       const response = await client.photos.search({
         query: QUERY,
@@ -37,6 +38,11 @@ function App() {
         if (!response.photos.length || !response.next_page) {
           //if there are no more photos to fetch, stop fetching
           setCanFetch(false)
+
+          //if there are no photos at all, show a message
+          if (![...gallery, ...response.photos].length) {
+            setError('Sorry, No photos found 😢')
+          }
         }
 
         const photos = response.photos.map((photo) => {
@@ -46,14 +52,13 @@ function App() {
             url: photo.url,
             src: {
               x: photo.src.medium,
-              xx: photo.src.large,
+              xx: photo.src.large2x,
             },
             alt: photo.alt || 'No Title',
             favorite: isFavorite(photo.id),
           }
         })
         setGallery((gallery) => [...gallery, ...photos])
-
         setPage((page) => page + 1)
       }
     } catch (error) {

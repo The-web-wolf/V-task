@@ -6,7 +6,7 @@ export type GalleryItem = {
     x: string
     xx: string
   }
-  alt?: string
+  alt: string
 }
 
 export type InfiniteGalleryProps = {
