@@ -1,11 +1,14 @@
 import { ReactElement } from 'react'
 import { render, RenderOptions, cleanup } from '@testing-library/react'
 import { FavoritesProvider } from '@/contexts/favoriteContext'
-import { afterEach } from 'vitest'
+import { afterEach, beforeEach } from 'vitest'
 
 afterEach(() => {
   cleanup()
-  vi.restoreAllMocks()
+})
+
+beforeEach(() => {
+  vi.clearAllMocks()
 })
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
