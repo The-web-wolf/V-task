@@ -26,12 +26,20 @@ In the `src` folder, you can find the `constants.ts` file. Here you can customiz
 - `PER_PAGE`: The number of images to be fetched per page. Default is 9.
 - `QUERY`: The default search query. Default is "art".
 
-**All of these constants are required.**
+**Note**: All of these constants are required.
 
 ### Testing
 
 I've written some tests, to run them you can use the following command:
 
 ```bash
-npm run test
+npm run test:run
 ```
+
+Alternatively, you can run the tests in either watch or UI mode by running the following commands:
+
+```bash
+npm run test # Watch mode
+npm run test:ui # UI mode
+```
+**Note**: The UI mode requires you to have a browser installed as it will open a new browser window to run the tests and show a more friendly interface.
