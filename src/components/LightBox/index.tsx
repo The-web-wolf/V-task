@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { LightBoxContext } from '@/contexts/lightBoxContext'
-import Loader from '@/components/Loader'
+import Spinner from '@/components/Spinner'
 import './style.scss'
 import FavoriteButton from '@/components/FavoriteButton'
 
@@ -63,7 +63,7 @@ const LightBox = () => {
             />
             {!imgLoaded && (
               <div className="loadingImg">
-                <Loader theme="dark" />
+                <Spinner theme="dark" />
               </div>
             )}
           </div>
