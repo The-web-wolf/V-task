@@ -19,14 +19,6 @@ const LightBox = () => {
     onFetchPhotos,
   } = useContext(LightBoxContext)
 
-  const handleNext = async () => {
-    if (hasNext()) {
-      onNext()
-    } else {
-      onFetchPhotos()
-    }
-  }
-
   // events listener for keyboard navigation
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -47,7 +39,11 @@ const LightBox = () => {
   }, [hasNext, hasPrev, onNext, onPrev, onClose])
 
   return (
-    <div className={`lightboxWrapper ${lightbox ? 'show' : ''}`} aria-hidden={!lightbox}>
+    <div
+      className={`lightboxWrapper ${lightbox ? 'show' : ''}`}
+      aria-hidden={!lightbox}
+      role="lightbox"
+    >
       {lightbox && (
         <div className="lightbox">
           <div className="lightboxInfo">
@@ -79,14 +75,26 @@ const LightBox = () => {
           >
             west
           </button>
-          <button
-            className="next material-symbols-rounded"
-            onClick={handleNext}
-            aria-label={hasNext() ? 'Next' : 'Fetch more photos'}
-            disabled={!canFetch && !hasNext()}
-          >
-            {hasNext() ? 'east' : 'steppers'}
-          </button>
+          {(hasNext() || !canFetch) && (
+            <button
+              className="next material-symbols-rounded"
+              onClick={onNext}
+              aria-label="Next"
+              disabled={!hasNext()}
+            >
+              east
+            </button>
+          )}
+          {!hasNext() && canFetch && (
+            <button
+              className="fetch-more material-symbols-rounded"
+              onClick={onFetchPhotos}
+              aria-label="Fetch more photos"
+            >
+              steppers
+            </button>
+          )}
+
           <div className="header">
             <FavoriteButton id={lightbox.id} showText={false} />
             <button className="close material-symbols-rounded" onClick={onClose} aria-label="Close">

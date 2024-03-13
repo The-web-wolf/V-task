@@ -31,8 +31,8 @@ const LightBoxProvider = ({
   }
   const hasNext = () => {
     if (!lightbox) return false
-    const idx = gallery.findIndex((i) => i.id === lightbox.id)
-    return idx < gallery.length - 1
+    const idx = gallery.findIndex((i) => i.id === lightbox.id) // get the index of the current lightbox
+    return idx < gallery.length - 1 // check if the current lightbox is not the last one
   }
   const hasPrev = () => {
     if (!lightbox) return false
