@@ -1,4 +1,4 @@
-.loader {
+.spinner {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -6,7 +6,7 @@
   margin: 15px auto;
   position: relative;
   box-sizing: border-box;
-  animation: animloader 0.7s linear infinite alternate;
+  animation: animspinner 0.7s linear infinite alternate;
 
   &.light {
     color: #020c1c;
@@ -16,7 +16,7 @@
   }
 }
 
-@keyframes animloader {
+@keyframes animspinner {
   0% {
     box-shadow: -38px -12px, -14px 0, 14px 0, 38px 0;
   }
@@ -32,4 +32,4 @@
 }
 
 // Got this loading keyframe animation from:
-// https://cssloaders.github.io/
+// https://cssspinners.github.io/
