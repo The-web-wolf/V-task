@@ -1,12 +1,12 @@
 import { useState, useContext, useEffect } from 'react'
-import { createClient } from 'pexels'
 import InfiniteGallery from '@/components/InfiniteGallery'
 import type { GalleryItem } from '@/types/gallery'
 import { PER_PAGE, TOTAL_LIMIT, QUERY } from '@/constants'
 import { FavoritesContext } from '@/contexts/favoriteContext'
 import Loader from '@/components/Loader'
-import LightBox from './components/LightBox'
+import LightBox from '@/components/LightBox'
 import { LightBoxProvider } from '@/contexts/lightBoxContext'
+import queryPexels from '@/utils/query-pexels'
 
 function App() {
   const [gallery, setGallery] = useState<GalleryItem[]>([])
@@ -14,7 +14,6 @@ function App() {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
   const [canFetch, setCanFetch] = useState<boolean>(true)
-  const client = createClient(import.meta.env.VITE_PEXELS_API_KEY)
   const { isFavorite } = useContext(FavoritesContext)
 
   const fetchPhotos = async () => {
@@ -27,7 +26,7 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const response = await client.photos.search({
+      const response = await queryPexels({
         query: QUERY,
         per_page: PER_PAGE,
         page,
