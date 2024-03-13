@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@test-utils'
+import { render, screen, fireEvent } from '@/utils/test-utils'
 import LightBox from '@/components/LightBox'
 import { LightBoxProvider, LightBoxContext } from '@/contexts/lightBoxContext'
 

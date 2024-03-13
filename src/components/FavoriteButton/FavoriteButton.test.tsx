@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@test-utils'
+import { render, screen, fireEvent } from '@/utils/test-utils'
 import { FavoritesContext } from '@/contexts/favoriteContext'
 import FavoriteButton from '@/components/FavoriteButton'
 

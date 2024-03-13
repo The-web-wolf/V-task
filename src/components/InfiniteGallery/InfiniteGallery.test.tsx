@@ -1,5 +1,5 @@
 import InfiniteGallery from '@/components/InfiniteGallery'
-import { render, screen } from '@test-utils'
+import { render, screen } from '@/utils/test-utils'
 
 // mock IntersectionObserver
 const IntersectionObserverMock = vi.fn(() => ({

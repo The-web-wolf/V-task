@@ -1,5 +1,5 @@
 import Loader from '@/components/Loader'
-import { render } from '@test-utils'
+import { render } from '@/utils/test-utils'
 
 describe('Loader', () => {
   test('renders loader with default theme', () => {

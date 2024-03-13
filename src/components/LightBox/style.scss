@@ -37,7 +37,7 @@
       .mainImg {
         opacity: 0;
         object-fit: contain;
-        max-width: 100%;
+        max-width: calc(100% - 6rem);
         max-height: 85vh;
         &.loaded {
           @include showAnim;
@@ -124,6 +124,11 @@
     }
 
     @media screen and (max-width: 1106px) {
+      .img {
+        .mainImg {
+          max-width: 100%;
+        }
+      }
       .next,
       .fetch-more,
       .prev,
