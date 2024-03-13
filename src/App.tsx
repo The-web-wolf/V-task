@@ -3,7 +3,7 @@ import InfiniteGallery from '@/components/InfiniteGallery'
 import type { GalleryItem } from '@/types/gallery'
 import { PER_PAGE, TOTAL_LIMIT, QUERY } from '@/constants'
 import { FavoritesContext } from '@/contexts/favoriteContext'
-import Loader from '@/components/Loader'
+import Spinner from '@/components/Spinner'
 import LightBox from '@/components/LightBox'
 import { LightBoxProvider } from '@/contexts/lightBoxContext'
 import queryPexels from '@/utils/query-pexels'
@@ -86,7 +86,7 @@ function App() {
         />
       </LightBoxProvider>
       {error && <div className="error">{error}</div>}
-      {loading && <Loader />}
+      {loading && <Spinner />}
     </div>
   )
 }
